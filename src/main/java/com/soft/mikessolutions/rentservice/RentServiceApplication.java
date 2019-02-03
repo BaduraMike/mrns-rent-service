@@ -1,4 +1,4 @@
-package com.soft.mikessolutions.rentservice.rentservice;
+package com.soft.mikessolutions.rentservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.soft.mikessolutions.rentservice.rentservice;
+package com.soft.mikessolutions.rentservice;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
