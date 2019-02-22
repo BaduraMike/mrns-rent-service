@@ -16,6 +16,17 @@ public class User {
     public User() {
     }
 
+    public User(Long id, String firstName, String lastName, Company company, String email, String phoneNumber, String password, String userType) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.company = company;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.userType = userType;
+    }
+
     public Long getId() {
         return id;
     }
