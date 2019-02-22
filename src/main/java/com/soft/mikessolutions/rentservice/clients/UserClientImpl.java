@@ -2,6 +2,7 @@ package com.soft.mikessolutions.rentservice.clients;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.soft.mikessolutions.rentservice.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -15,11 +16,14 @@ import java.net.URI;
 
 @Service
 public class UserClientImpl implements UserClient {
+    private final User DEFAULT_USER = new User(0L, "John","Doe",
+            null,"johndoe@doe.com", "000-000-000","pass","DEFAULT");
+
     private RestTemplate restTemplate;
     private EurekaClient discoveryClient;
 
     private String serviceUrl() {
-        InstanceInfo instance = discoveryClient.getNextServerFromEureka("user-service",false);
+        InstanceInfo instance = discoveryClient.getNextServerFromEureka("user-service", false);
         return instance.getHomePageUrl();
     }
 
@@ -30,6 +34,7 @@ public class UserClientImpl implements UserClient {
     }
 
     @Override
+    @HystrixCommand(fallbackMethod = "userFallback")
     public User findById(Long id) {
         return restTemplate.getForObject(serviceUrl() + "/users/" + id, User.class);
     }
@@ -43,5 +48,10 @@ public class UserClientImpl implements UserClient {
                 .toObject(new TypeReferences.ResourcesType<Resource<User>>() {
                 });
         return users;
+    }
+
+    @HystrixCommand
+    public User userFallback(Long id) {
+        return DEFAULT_USER;
     }
 }
