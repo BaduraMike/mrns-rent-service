@@ -1,6 +1,5 @@
 package com.soft.mikessolutions.rentservice.clients;
 
-import com.soft.mikessolutions.rentservice.entities.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,15 +18,7 @@ public class UserClientImplTest {
     private UserClient userClient;
 
     @Test
-    public void shouldFindAllUsersAndReturnNonZeroSizeOfCollection() throws Exception {
-        Assert.assertNotEquals(0, userClient.findAll().getContent().size());
-    }
-
-    @Test
-    public void shouldFindUserWithClientById() {
-        User user = userClient.findById(1L);
-        User user2 = userClient.findById(user.getId() + 1);
-
-        Assert.assertNotEquals(user, user2);
+    public void shouldFindAllUsersAndReturnNonZeroSizeOfCollection() {
+        Assert.assertNotEquals(0, userClient.getUsers().getContent().size());
     }
 }
