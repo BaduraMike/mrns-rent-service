@@ -1,13 +1,15 @@
 package com.soft.mikessolutions.rentservice.clients;
 
+import com.soft.mikessolutions.rentservice.exceptions.CustomClientException;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -17,8 +19,25 @@ public class UserClientImplTest {
     @Autowired
     private UserClient userClient;
 
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
     @Test
-    public void shouldFindAllUsersAndReturnNonZeroSizeOfCollection() {
+    public void shouldGetUsersAndReturnNonZeroSizeOfCollection() {
         Assert.assertNotEquals(0, userClient.getUsers().getContent().size());
+    }
+
+    @Test
+    public void shouldGetUserByExistingId() {
+        Long existingId = (long) userClient.getUsers().getContent().size();
+        Assert.assertNotNull(userClient.getUserById(existingId));
+    }
+
+    @Test
+    public void shouldThrowCustomClientExceptionWithMessage404ForGetUserByNonExistingId() {
+        Long nonExistingId = (long) userClient.getUsers().getContent().size() + 1;
+        expectedException.expect(CustomClientException.class);
+        expectedException.expectMessage("404");
+        Assert.assertNotNull(userClient.getUserById(nonExistingId));
     }
 }

@@ -5,6 +5,7 @@ import com.soft.mikessolutions.rentservice.clients.UserClient;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,4 +20,10 @@ public class UserController {
     public Resources<Resource<User>> all() {
         return userClient.getUsers();
     }
+
+    @GetMapping("/users/{id}")
+    public Resource<User> one(@PathVariable("id") Long id) {
+        return userClient.getUserById(id);
+    }
+
 }
