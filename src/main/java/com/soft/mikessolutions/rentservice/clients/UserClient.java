@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Component
-@FeignClient(value = "user-service")
+@FeignClient(name = "user-service")
 public interface UserClient {
     @GetMapping("/users")
     Resources<Resource<User>> getUsers();
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/users/id")
     Resource<User> getUserById(@RequestParam("id") Long id);
 }

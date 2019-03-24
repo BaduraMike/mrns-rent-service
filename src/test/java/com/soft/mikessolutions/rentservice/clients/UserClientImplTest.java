@@ -1,6 +1,5 @@
 package com.soft.mikessolutions.rentservice.clients;
 
-import com.soft.mikessolutions.rentservice.exceptions.CustomClientException;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -9,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
@@ -36,8 +36,8 @@ public class UserClientImplTest {
     @Test
     public void shouldThrowCustomClientExceptionWithMessage404ForGetUserByNonExistingId() {
         Long nonExistingId = (long) userClient.getUsers().getContent().size() + 1;
-        expectedException.expect(CustomClientException.class);
-        expectedException.expectMessage("404");
+        expectedException.expect(ResourceNotFoundException.class);
+        expectedException.expectMessage("Resource you are trying to get from the client is not found");
         Assert.assertNotNull(userClient.getUserById(nonExistingId));
     }
 }
