@@ -10,7 +10,6 @@ public class User {
     private Company company;
     private String email;
     private String phoneNumber;
-    private String password;
     private String userType;
 
     public User() {
@@ -23,7 +22,6 @@ public class User {
         this.company = company;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.password = password;
         this.userType = userType;
     }
 
@@ -49,10 +47,6 @@ public class User {
 
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getUserType() {
@@ -83,10 +77,6 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public void setUserType(String userType) {
         this.userType = userType;
     }
@@ -100,7 +90,6 @@ public class User {
                 ", company=" + company +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", password='" + password + '\'' +
                 ", userType='" + userType + '\'' +
                 '}';
     }

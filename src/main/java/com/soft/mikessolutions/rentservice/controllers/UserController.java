@@ -19,12 +19,12 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public Resources<Resource<User>> all() {
+    public Resources<Resource<User>> allUsers() {
         return userClient.getUsers();
     }
 
     @GetMapping("/users/{id}")
-    public Resource<User> one(@PathVariable("id") Long id) {
+    public Resource<User> oneUser(@PathVariable("id") Long id) {
         return userClient.getUserById(id);
     }
 
