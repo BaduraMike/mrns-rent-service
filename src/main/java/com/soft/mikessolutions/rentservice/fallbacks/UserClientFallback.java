@@ -47,4 +47,10 @@ public class UserClientFallback implements UserClient {
         logger.warn("Client fallback");
         return defaultUserResourceAssembler.toResource(DEFAULT_USER);
     }
+
+    @Override
+    public Resource<User> getUserByEmail(String email) {
+        logger.warn("Client fallback");
+        return defaultUserResourceAssembler.toResource(DEFAULT_USER);
+    }
 }

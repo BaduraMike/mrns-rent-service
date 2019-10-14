@@ -7,7 +7,7 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Component
 @FeignClient(name = "user-service", fallback = UserClientFallback.class)
@@ -16,5 +16,8 @@ public interface UserClient {
     Resources<Resource<User>> getUsers();
 
     @GetMapping("/users/{id}")
-    Resource<User> getUserById(@RequestParam("id") Long id);
+    Resource<User> getUserById(@PathVariable("id") Long id);
+
+    @GetMapping(value = "/users/email/{email}")
+    Resource<User> getUserByEmail(@PathVariable("email") String email);
 }

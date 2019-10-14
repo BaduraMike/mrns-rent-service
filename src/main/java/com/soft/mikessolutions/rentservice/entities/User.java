@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
-    private Long id;
+    private Long identityNumber;
     private String firstName;
     private String lastName;
     private Company company;
@@ -15,8 +15,8 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String firstName, String lastName, Company company, String email, String phoneNumber, String password, String userType) {
-        this.id = id;
+    public User(Long identityNumber, String firstName, String lastName, Company company, String email, String phoneNumber, String password, String userType) {
+        this.identityNumber = identityNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.company = company;
@@ -25,8 +25,8 @@ public class User {
         this.userType = userType;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdentityNumber() {
+        return identityNumber;
     }
 
     public String getFirstName() {
@@ -53,38 +53,10 @@ public class User {
         return userType;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
-
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "identityNumber=" + identityNumber +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", company=" + company +
